@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Relic Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 320px;
+      padding: 30px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: #667eea;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .logo::before {
+      content: "NR";
+      font-size: 20px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-bottom: 30px;
+    }
+
+    .login-btn {
+      background: #667eea;
+      border: none;
+      color: white;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .login-btn:hover {
+      background: #5a6fd8;
+    }
+
+    .login-btn:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 15px;
+      font-size: 13px;
+      padding: 10px 15px;
+      border-radius: 6px;
+      background: #e8f4fd;
+      color: #2980b9;
+      border: 1px solid #bee5eb;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border-color: #c3e6cb;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border-color: #f5c6cb;
+    }
+
+    .loading {
+      display: none;
+      margin-top: 15px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #e9ecef;
+      border-radius: 50%;
+      border-top: 2px solid #667eea;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      font-size: 12px;
+      color: #6c757d;
+    }
+
+    .close-btn {
+      background: #6c757d;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .close-btn:hover {
+      background: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo"></div>
+    <h1 class="title">New Relic</h1>
+    <p class="subtitle">Quick Login</p>
+    
+    <button id="loginBtn" class="login-btn">
+      <span id="btnText">Login to New Relic</span>
+    </button>
+    
+    <div id="status" class="status" style="display: none;"></div>
+    
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Authenticating...</div>
+    </div>
+    
+    <button id="closeBtn" class="close-btn" style="display: none;">
+      Close
+    </button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
