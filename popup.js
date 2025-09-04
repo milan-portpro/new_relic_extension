@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       try {
         console.log('Attempting to fetch cookies from API...');
-        const response = await fetch('http://localhost:9003/api/token/cookie', {
+        const response = await fetch('http://localhost:9003/api/token/newreliccookie', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

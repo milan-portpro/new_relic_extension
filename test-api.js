@@ -5,7 +5,7 @@ const testAPI = async () => {
   try {
     console.log('🧪 Testing New Relic API endpoint...');
     
-    const response = await fetch('http://localhost:9003/api/token/cookie', {
+    const response = await fetch('http://localhost:9003/api/token/newreliccookie', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
