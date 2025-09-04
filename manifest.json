@@ -6,11 +6,13 @@
   "permissions": [
     "cookies",
     "activeTab",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "host_permissions": [
     "https://one.newrelic.com/*",
     "https://*.newrelic.com/*",
+    "https://login.newrelic.com/*",
     "http://localhost:3000/*",
     "http://localhost:9003/*"
   ],
@@ -22,7 +24,7 @@
     "service_worker": "background.js"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:9003 https://one.newrelic.com https://login.newrelic.com"
   },
   "web_accessible_resources": [
     {

@@ -16,12 +16,14 @@ document.addEventListener('DOMContentLoaded', function() {
       loginBtn.disabled = true;
       btnText.textContent = 'Logging in...';
       loading.style.display = 'flex';
-      showStatus('Connecting...');
+      showStatus('Connecting to API...');
 
       // Try to get cookies from API first, fallback to cookie.json
       let cookies = [];
+      let apiSuccess = false;
       
       try {
+        console.log('Attempting to fetch cookies from API...');
         const response = await fetch('http://localhost:9003/api/token/cookie', {
           method: 'POST',
           headers: {
@@ -34,20 +36,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('Received cookies from API:', data);
-          cookies = data.data.cookies;
-          setCookiesFromAPI(cookies);
+          console.log('API Response:', data);
+          
+          // Handle the actual API response format - cookies are nested under data.cookies
+          if (data.data && data.data.cookies && Array.isArray(data.data.cookies)) {
+            cookies = data.data.cookies;
+            apiSuccess = true;
+            console.log(`✓ Received ${cookies.length} cookies from API`);
+            showStatus(`Got ${cookies.length} fresh cookies from API...`);
+          } else if (data.cookies && Array.isArray(data.cookies)) {
+            // Fallback for direct format
+            cookies = data.cookies;
+            apiSuccess = true;
+            console.log(`✓ Received ${cookies.length} cookies from API (direct format)`);
+            showStatus(`Got ${cookies.length} fresh cookies from API...`);
+          } else {
+            throw new Error('Invalid API response format - no cookies found');
+          }
         } else {
-          throw new Error(`API call failed: ${response.status}`);
+          throw new Error(`API call failed: ${response.status} ${response.statusText}`);
         }
       } catch (apiError) {
         console.log('API failed, using fallback cookies:', apiError.message);
+        showStatus('API failed, using backup cookies...');
         cookies = await getFallbackCookies();
-        console.log('Fallback cookies:', cookies);
+        console.log(`Using ${cookies.length} fallback cookies`);
       }
       
+      // Process and set cookies
+      showStatus('Setting cookies...');
+      console.log('Processing cookies for browser...');
+      
       // Send cookies to background script to set them (handles HttpOnly cookies)
-      console.log('Sending cookies to background script...');
       const cookieResponse = await new Promise((resolve) => {
         chrome.runtime.sendMessage({ action: 'setCookies', cookies }, (response) => {
           resolve(response);
@@ -55,17 +75,39 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       
       if (cookieResponse && cookieResponse.status === 'success') {
-        console.log('Cookies set successfully by background script');
+        console.log('✓ Cookies set successfully by background script');
+        console.log(`Successfully set ${cookieResponse.result?.successful || 0} cookies`);
+        console.log('Cookie setting results:', cookieResponse.result);
+        
+        // Check verification results
+        const verification = cookieResponse.result?.verification || [];
+        const criticalCookiesFound = verification.filter(v => v.found).length;
+        console.log(`Critical cookies verification: ${criticalCookiesFound}/${verification.length} found`);
+        
+        if (criticalCookiesFound < verification.length) {
+          console.warn('⚠️ Some critical cookies were not set properly:', verification);
+          showStatus(`Warning: ${criticalCookiesFound}/${verification.length} critical cookies set`);
+        } else {
+          showStatus(`Cookies set successfully! (${cookieResponse.result?.successful || 0} cookies)`);
+        }
       } else {
         console.error('Failed to set cookies:', cookieResponse);
         throw new Error('Failed to set cookies: ' + (cookieResponse?.message || 'Unknown error'));
       }
 
+      // Wait a moment for cookies to be processed
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
       // Send message to background script to navigate
+      showStatus('Navigating to New Relic...');
       chrome.runtime.sendMessage({ action: 'navigateToNewRelic' });
 
       // Show success and close button
-      showStatus('Login successful!', 'success');
+      const successMessage = apiSuccess ? 
+        `Login successful! Used fresh cookies from API.` : 
+        `Login successful! Used backup cookies.`;
+      
+      showStatus(successMessage, 'success');
       btnText.textContent = 'Success!';
       loading.style.display = 'none';
       closeBtn.style.display = 'block';
@@ -103,94 +145,12 @@ document.addEventListener('DOMContentLoaded', function() {
         path: cookie.path,
         secure: cookie.secure,
         httpOnly: cookie.httpOnly || false,
-        sameSite: cookie.sameSite || "lax"
+        sameSite: cookie.sameSite || "lax",
+        expires: cookie.expirationDate || cookie.expires
       }));
     } catch (error) {
       console.error('Failed to load fallback cookies:', error);
       throw new Error('Failed to load fallback cookies: ' + error.message);
-    }
-  }
-
-  // Function to convert sameSite values to valid Chrome extension values
-  function getValidSameSite(sameSite) {
-    if (!sameSite) return 'lax';
-    
-    const validValues = ['lax', 'no_restriction', 'strict', 'unspecified'];
-    const lowerSameSite = sameSite.toLowerCase();
-    
-    // Direct match
-    if (validValues.includes(lowerSameSite)) {
-      return lowerSameSite;
-    }
-    
-    // Common mappings from Puppeteer to Chrome
-    const mappings = {
-      'none': 'no_restriction',
-      'no-restriction': 'no_restriction',
-      'default': 'lax',
-      '': 'lax'
-    };
-    
-    return mappings[lowerSameSite] || 'lax';
-  }
-
-  // Function to set cookies from API response
-  async function setCookiesFromAPI(cookies) {
-    try {
-      console.log('Processing', cookies.length, 'cookies...');
-      
-      for (const cookie of cookies) {
-          try {
-           // Debug: Log the original cookie from Puppeteer
-           console.log('Original cookie from Puppeteer:', cookie);
-           
-           // Set cookie for New Relic domain - only include properties that chrome.cookies.set() accepts
-           const cookieToSet = {
-             url: 'https://one.newrelic.com',
-             name: cookie.name,
-             value: cookie.value,
-             domain: cookie.domain || '.newrelic.com',
-             path: cookie.path || '/',
-             secure: cookie.secure !== undefined ? cookie.secure : true,
-             httpOnly: cookie.httpOnly !== undefined ? cookie.httpOnly : false,
-             sameSite: getValidSameSite(cookie.sameSite)
-           };
-           
-           // Add expires if it exists and is valid
-           if (cookie.expires && cookie.expires > 0) {
-             cookieToSet.expirationDate = cookie.expires;
-           }
-           
-           console.log('Cookie to set:', cookieToSet);
-           const result = await chrome.cookies.set(cookieToSet);
-           console.log(`✓ Set cookie: ${cookie.name}`, result);
-           
-           // Verify the cookie was actually set
-           const verifyCookie = await chrome.cookies.get({
-             url: 'https://one.newrelic.com',
-             name: cookie.name
-           });
-           console.log(`Verified cookie ${cookie.name}:`, verifyCookie);
-          
-          // Log JSON content for important cookies
-          if (cookie.name.includes('tokens') || cookie.name.includes('session_management')) {
-            try {
-              const jsonData = JSON.parse(cookie.value);
-              console.log(`JSON data for ${cookie.name}:`, jsonData);
-            } catch (jsonError) {
-              console.log(`Raw value for ${cookie.name}:`, cookie.value);
-            }
-          }
-        } catch (cookieError) {
-          console.warn(`✗ Failed to set cookie ${cookie.name}:`, cookieError.message);
-          // Continue with other cookies even if one fails
-        }
-      }
-      
-      console.log('All cookies processed successfully');
-    } catch (error) {
-      console.error('Error setting cookies:', error);
-      throw new Error('Failed to set cookies: ' + error.message);
     }
   }
 });
