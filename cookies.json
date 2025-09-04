@@ -277,20 +277,7 @@
   },
   {
     "domain": ".newrelic.com",
-    "expirationDate": 1756898469.047492,
-    "hostOnly": false,
-    "httpOnly": true,
-    "name": "login_service_session_management_login_newrelic_com",
-    "path": "/",
-    "sameSite": "no_restriction",
-    "secure": true,
-    "session": false,
-    "storeId": "0",
-    "value": "%7B%22token%22%3A%22HExbw7%2BIZdqSmuSra%2FrRcq%2Fx7d1OaFh2xvsM4iWm8V2UBkAHA8Wfp5p5VkuE28%2FNziikaiSNfe2sLFsM5fixOdFwt9TtTq4Ry2Y6dyzQDN2qFFkTLGTf%2FcCgwwxO6RN66dS1hyYn9o6tvNhyr5pAWS6VO%2FrjQy0Ppq0CsT4mFFp2RpQ3IAFk%2FfbOREqjn4yGgdDrRARLyd1hVTI69iBzYV%2FZaXW1NQjlkzdaLbgjGZliogpTCznOcDZaxln04CnGN%2BfnJFQmBGAIudIoAR6aVo1ObT8rIUvvwOTBXFkLRKSe9fERi3bO4jN9FLgagrTX%2B8rl4r3xeodwlUOhytuJ0w%3D%3D%22%7D"
-  },
-  {
-    "domain": ".newrelic.com",
-    "expirationDate": 1788431489,
+    "expirationDate": 1788491486,
     "hostOnly": false,
     "httpOnly": false,
     "name": "TSNGUID",
@@ -315,7 +302,20 @@
   },
   {
     "domain": ".newrelic.com",
-    "expirationDate": 1791455487.58838,
+    "expirationDate": 1756959080.638521,
+    "hostOnly": false,
+    "httpOnly": true,
+    "name": "login_service_session_management_login_newrelic_com",
+    "path": "/",
+    "sameSite": "no_restriction",
+    "secure": true,
+    "session": false,
+    "storeId": "0",
+    "value": "%7B%22token%22%3A%22RQqERSI92aAuEgtENCxcgYpQtGfJcLS1eAjYARXFqOwim84HcsOTISlxjkw7WEzVgGI21QJUYPPvzmMIwljnj7cX8YdDrvqODBRlRCVqePhzHXhO6HHFuI01HRf5Id8ngvltGLB5F9%2Byg99NQr3BHIInlyNbnDKxuC2L69ycJujeZVjZU39YD2rUiaddweyoHPN%2FhFV2BH4T0INjALwDVzKp9IUJxzuVz81mJK5MdyuNAyQBokjQfi3gFEIo3wBB82QXuxYVeJOG4zAOXkK7nGWv3dRGU3iKT8IbhRpumVw9rsBjq%2F7KI5gO9qgQ%2FCR9czXwR4P%2BAtcL3Jo1qzyYxA%3D%3D%22%7D"
+  },
+  {
+    "domain": ".newrelic.com",
+    "expirationDate": 1791515484.545563,
     "hostOnly": false,
     "httpOnly": true,
     "name": "login_service_login_newrelic_com_tokens",
@@ -324,20 +324,7 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "%7B%22token%22%3A%22IEDLG3Uc7SKcdtD8F%2FIY301z5d9u27gS4SSZQoMVdul8S1vTJiDIX83JayfnU3r8KpyoFm2w8APnGxlZ0b7q01E9Q%2BfA5mi%2FiBDtguYfG7U1CAt4LTTqzH%2B6i%2Bgp8AO95AnWFyNy13AxvWjnbocek0mlNTHQsfDd893QXfjWG82C5DVcyNY%2BTbgj8jIfO9lHBbN%2F6zE7uCv6CaPtAKe7Q5sbbwUt%2FXO8emcYpXn2IGJJEM9P53fVd4oSchOstQt0e154BQbrkHOz0lFD%2FfD3bySawIva7B0sX%2FrzjsG738KDCtjCKoW7XpkHY7lGmalDw6RuAjVFj6vkJKIxpI1fC7EQ8BZ03IvfwjpODKKPfpgV0eYHbtR19s0qLvPEJtcWUUfIlPPZhBTbnO9s%2FqMscS5pjf0tIMfbwNCX1%2FBX%2BIZVY9P5jddcKPcPKqtfY2OOWrCZ2PwcvgKYUxvLAcVJwcSC1xScm%2B%2BYxtlf6LPlRODKgMh65PuXzzbruuoSSKy%2FsOVuIa2gnrjvoXrZPFHdsBc%2B9IA%2Bla87%2BqNF1kJNSRv6qjOKyuNfKSkmgehat9fQRMkmDm5Ef5O004p65BTkPpUfcKlpFDdXM%2Bwa0SeYhaz4d3sTU6vPHjrSC3dOml30mStXLxpivooFitY9SxYf76UKF9jte9RmBc2fMx0vIws%3D%22%2C%22refresh_token%22%3A%22S6uQ9p1LU8QqisHcWYBCnaE5zh9qrO%2Byi1vYcf7Z5vk3Sn6qmo8KJbjG3KgXn%2FImthItRj2GN5Sr9paSlxtJkEiwG3s%2FgyMnRUGES9%2Fu5%2BUV2RRp7KWivsEcRFtsFiDgfUunVw2PCPOEm9LIHCG729Uxp2pL2QNXVdhdpfMSXye5Oe0M7ekvz3h676%2FLXTmOKV7Z09ou5%2F7P6K3X89SWJbTUjik8xBWBAS9B5GluEj8i056vV0vfRcsWVSfJ5EHcNI578t16VM3vR7hb9p0znIugeNkgtjTOilTo3u5B2Tkgk9Wd97xGsuczk6uVU9O5lBLoMU14YqDxHG1woh%2Fb2Q%3D%3D%22%7D"
-  },
-  {
-    "domain": ".newrelic.com",
-    "expirationDate": 1788452189,
-    "hostOnly": false,
-    "httpOnly": false,
-    "name": "login_idle_session_timeout",
-    "path": "/",
-    "sameSite": "unspecified",
-    "secure": false,
-    "session": false,
-    "storeId": "0",
-    "value": "{\"lastInteractionAt\":1756895489,\"warningTime\":180}"
+    "value": "%7B%22token%22%3A%22ijSrWxHqPEzQ3rAlt7hcITdElzTvwuI%2Bs3Twp4PNUzO8JVa8HZ9eELUBzog4Bgvih%2Br8bNOXD2%2BcV5zSj%2BBNyYxHcl2B5XMjb1zrQLMENIe4Sn8hFAFJPe%2B%2BlaJjpFkqDLs3Sk3KPV27qbUxfFWiy3%2BR0CY18hH3fioPsxEHLxmDj0w%2Frrp35X9%2Fd5Tgt6Q0orKLhr1ad0B0DsgVzesorVekGcNJptY8pe1a0dYcVJjhpCItEo%2FwkzXiFHlrzdXlr2Y404Du%2BL0fuRURwHR%2B3QkV2D057ehqmXaZWL8HNRX2%2BZQ%2F4XrWebw621PxA3KezaE%2FPk60vaaki35REA2TzjzYytEY9gBbPXOYUEMFP54BnUAaWsA0FpNTtox%2FAsqyd3zbUZuzu74Iz8CvKhE0kHZDDwpNCQrLg3ujChcQ6%2BzgSjKs74l0DjclrCFLDslwZQ1vPh%2FhqYt1OvegbASeKqaXnp%2BjP5rfIs5vqMN1HUzZ2PhuPAz7UG0apN2f7400OIXfMb4aYhGMFkS4uXHE4rYCfZU%2F2zBE2vwTaKFxfTwcKx0WDwjryhxUMycbdonM8Y6kOEOw%2FeMqqZd5ACckxfF%2BQuTMAe9CfagW%2Fk9z4Ky%2B3bhwtQcFofuNa9OJd7LwUMIvdO%2FX9mbNOqjq36RDWCzQJlDshNabbv1IkuvIlwo%3D%22%2C%22refresh_token%22%3A%22Tz5JGEl8PdYoKkM4R9dybVwhSI94JBHWZ8acHwabQksh5XIEegA%2Bd8jwANvblIUk6vN3bNP8ZLTwM3vBu9D6vMveTLgNUuxold1%2FFnz9MftYWPxvG4DI5HFO8hu6Q5uxLS0NiGD4stKzlASwVcB7Q%2Fla%2BkL%2BPpeH%2FkEMz0JKbiBXav0cRWEx36oJcI3Ox8%2FPDu3xN16icEbAR7bJs2ykz%2BIzluLHhy7wfhl3v667EnK%2FRtyFjM%2BGAyW7pRdRDDVsALnJbndn5pzTZ7EeW6wtOjQbY%2FWXl%2FxXzj3fMDVXq%2BXcTMUpXaQSNvvL1Zvjjc3WHdIDg9B%2FrbbVN5QUEob4cA%3D%3D%22%7D"
   },
   {
     "domain": ".newrelic.com",
@@ -349,6 +336,19 @@
     "secure": false,
     "session": true,
     "storeId": "0",
-    "value": "1756894880047,1756895493839"
+    "value": "1756955486707,1756955501607"
+  },
+  {
+    "domain": ".newrelic.com",
+    "expirationDate": 1788512215,
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "login_idle_session_timeout",
+    "path": "/",
+    "sameSite": "unspecified",
+    "secure": false,
+    "session": false,
+    "storeId": "0",
+    "value": "{\"lastInteractionAt\":1756955515,\"warningTime\":180,\"lastIdleLimitCheck\":1756955494,\"idleLimit\":7200}"
   }
 ]

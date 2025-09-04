@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const data = await response.json();
           console.log('Received cookies from API:', data);
           cookies = data.data.cookies;
+          setCookiesFromAPI(cookies);
         } else {
           throw new Error(`API call failed: ${response.status}`);
         }
